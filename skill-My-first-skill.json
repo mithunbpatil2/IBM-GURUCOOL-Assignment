@@ -1,0 +1,509 @@
+{
+  "intents": [
+    {
+      "intent": "Admission",
+      "examples": [
+        {
+          "text": "Admission"
+        },
+        {
+          "text": "Pg Admission"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "do we have canteen"
+        },
+        {
+          "text": "do we have hostel"
+        },
+        {
+          "text": "how many department are there"
+        },
+        {
+          "text": "whats time Time table"
+        },
+        {
+          "text": "who is head of department"
+        },
+        {
+          "text": "who is principal"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "welcome",
+      "examples": [
+        {
+          "text": "Dear Aspirant"
+        },
+        {
+          "text": "good afternoon"
+        },
+        {
+          "text": "good evening"
+        },
+        {
+          "text": "Good morning"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "welcome"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "admission",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "admission",
+          "synonyms": [
+            "admin",
+            "join",
+            "take admission",
+            "take course"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "join course",
+          "synonyms": [
+            "join course"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "department",
+          "synonyms": [
+            "branch",
+            "dept",
+            "subjects"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "hod",
+          "synonyms": [
+            "coordinator",
+            "department incharge",
+            "head",
+            "head of departemnt"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "hostel",
+          "synonyms": [
+            "gents hostel",
+            "Hostel",
+            "hstl",
+            "ladies hostel"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "library",
+          "synonyms": [
+            "book bank",
+            "books",
+            "lib",
+            "libry"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Principal",
+          "synonyms": [
+            "head of institute",
+            "princi"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "timetable",
+          "synonyms": [
+            "college timming",
+            "timming"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "welcome",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good afternoon",
+          "synonyms": [
+            "gd noon",
+            "good afternoon",
+            "good noon",
+            "gud noon"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good evening",
+          "synonyms": [
+            "gd evg",
+            "good evening",
+            "good evg",
+            "gud evg"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "gm",
+            "good Morning",
+            "Good MRG",
+            "gud morg"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. can you try you again"
+              },
+              {
+                "text": "Ooops sorry I did not get"
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_8_1601880418155",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "NKOCET WELCOME",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#welcome || @welcome",
+      "dialog_node": "node_3_1601876832727",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Admission",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "UG Admission is yet to be declared by Govt of MHindly contact :8983683360(M b patil)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@admission:admission || @admission:(join course)",
+      "dialog_node": "node_8_1601880418155",
+      "previous_sibling": "node_9_1601878016155"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry || @enquiry",
+      "dialog_node": "node_9_1601878016155",
+      "previous_sibling": "node_3_1601876832727"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "computer sceince, Electrical, ENTC,Civil,Mech"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1601878016155",
+      "conditions": "@enquiry:department",
+      "dialog_node": "response_10_1601878131999"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "we have dept wise head"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "Cse- Dr S D raut"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "ENTC-Dr Patki"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "Mech Dr Metan"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1601878016155",
+      "conditions": "@enquiry:hod",
+      "dialog_node": "response_1_1601879129616",
+      "previous_sibling": "response_10_1601878131999"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "good morning"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1601876832727",
+      "conditions": "@welcome:(good morning)",
+      "dialog_node": "response_2_1601877141076"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "good afternoon"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1601876832727",
+      "conditions": "@welcome:(good afternoon)",
+      "dialog_node": "response_3_1601877266046",
+      "previous_sibling": "response_2_1601877141076"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "9 am to 5pm"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1601878016155",
+      "conditions": "@enquiry:timetable",
+      "dialog_node": "response_5_1601879237368",
+      "previous_sibling": "response_6_1601879156545"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1601876832727",
+      "conditions": "anything_else",
+      "dialog_node": "response_6_1601877360365",
+      "previous_sibling": "response_8_1601877294934"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "source": "https://www.indiaspend.com/wp-content/uploads/2019/06/Library_1440.jpg",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_9_1601878016155",
+      "conditions": "@enquiry:library",
+      "dialog_node": "response_6_1601879156545",
+      "previous_sibling": "response_1_1601879129616"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Dr J B Dafedar"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1601878016155",
+      "conditions": "@enquiry:Principal",
+      "dialog_node": "response_7_1601879260844",
+      "previous_sibling": "response_5_1601879237368"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "good evening"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1601876832727",
+      "conditions": "@welcome:(good evening)",
+      "dialog_node": "response_8_1601877294934",
+      "previous_sibling": "response_3_1601877266046"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. Welcome to NKOCET Solapur, may I guide you ,Help you "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
