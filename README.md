@@ -13,3 +13,5 @@ Assignment :03 Iot
 https://node-red-zfmos-2020-09-30.mybluemix.net/ui/#!/0?socketid=179JJtvAoC9P_-o_AAAE
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
+DAY 5
+https://node-red-zfmos-2020-09-30.mybluemix.net/ui/#!/0?socketid=VyC6tPFOXMOr_LLNAAAO
